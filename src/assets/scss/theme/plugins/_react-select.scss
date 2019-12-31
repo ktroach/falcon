@@ -1,0 +1,29 @@
+.react-select__control{
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  .react-select__value-container {
+    padding-left: $card-spacer-x;
+    padding-right: $card-spacer-x;
+  }
+  .react-select__placeholder{
+    color: $gray-400;
+    margin: 0;
+  }
+  @include hover-focus {
+    outline: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  .react-select__multi-value {
+    background-color: $gray-200 !important;
+    border-radius: $border-radius;
+  }
+}
+.react-select__menu {
+  .react-select__option {
+    padding-left: $card-spacer-x;
+    padding-right: $card-spacer-x;
+  }
+}

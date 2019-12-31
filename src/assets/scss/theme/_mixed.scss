@@ -1,0 +1,71 @@
+/*-----------------------------------------------
+|   Object fit and Z-index
+-----------------------------------------------*/
+.fit-cover{ object-fit: cover; }
+.z-index-0{ z-index: 0; }
+.z-index-1{ z-index: 1; }
+.z-index-2{ z-index: 2; }
+.z-index-10{ z-index: 10; }
+
+/*-----------------------------------------------
+|   Sidebar
+-----------------------------------------------*/
+.sticky-sidebar{ top: 85px; }
+
+/*-----------------------------------------------
+|   Custom circle
+-----------------------------------------------*/
+.circle-dashed{
+  border: 1px dashed $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: map-get($avatars-dimension, '3xl' );
+  height: map-get($avatars-dimension, '3xl' )
+}
+
+/*-----------------------------------------------
+|   Outline
+-----------------------------------------------*/
+.outline-none {
+  @include hover-focus{
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+/*-----------------------------------------------
+|   Miscellaneous
+-----------------------------------------------*/
+@include hover-focus{ .hover-text-decoration-none{ text-decoration: none; } }
+.resize-none{ resize: none; }
+.l-unset{ left: unset !important; }
+.img-flip{ transform: scaleX(-1); }
+
+/*-----------------------------------------------
+|    Transition class
+-----------------------------------------------*/
+.transition-base{ transition: $transition-base; }
+@include media-breakpoint-up(md){
+  .vertical-line:after {
+    position: absolute;
+    content: '';
+    height: 75%;
+    width: 1px;
+    background: $gray-300;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+@include media-breakpoint-only(xl){ .vertical-line:after { display: none; } }
+
+/*-----------------------------------------------
+|   Opacity used in dashboard icons
+-----------------------------------------------*/
+.opacity-25{ opacity: 0.25; }
+.opacity-50{ opacity: 0.5; }
+.opacity-75{ opacity: 0.75; }
+.opacity-85{ opacity: 0.85; }
+.tooltip{ line-height: 1.3; }

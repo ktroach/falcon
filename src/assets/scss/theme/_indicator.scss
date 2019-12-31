@@ -1,0 +1,43 @@
+/*-----------------------------------------------
+|   Up/Down Indicator
+-----------------------------------------------*/
+.indicator-arrow {
+  display: block;
+  position: absolute;
+  left: 50%;
+  height: 0.625rem;
+  width: 0.625rem;
+  border-left: ($border-width * 2) solid $gray-600;
+  border-top: ($border-width * 2) solid $gray-600;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.indicator-arrow-one { top: 1.375rem; }
+.indicator-arrow-two { top: 1.75rem; }
+
+
+.indicator{
+  position: absolute;
+  height: 3rem;
+  width: 3rem;
+  left: 50%;
+}
+
+.indicator-up {
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.indicator-down {
+  bottom: 2rem;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+.indicator-arrow-left {
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+}
+.indicator-arrow-right {
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(135deg);
+}
