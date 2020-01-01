@@ -7,6 +7,7 @@ import Divider from '../common/Divider';
 import withRedirect from '../../hoc/withRedirect';
 import classnames from 'classnames';
 import axios from "axios";          
+import Datetime from 'react-datetime';
 
 const ApplicantForm = ({ setRedirect, setRedirectUrl, layout, hasLabel }) => {
     // State
@@ -15,9 +16,22 @@ const ApplicantForm = ({ setRedirect, setRedirectUrl, layout, hasLabel }) => {
     const [firstName, setFirstName] = useState('');
 
     const [highSchoolAttended, setHighSchoolAttended] = useState('');
+    const [dateOfCompletion, setDateOfCompletion] = useState('');    
 
     const [firstSchoolName, setFirstSchoolName] = useState('');
+    const [firstSchoolStart, setFirstSchoolStart] = useState('');
+    const [firstSchoolEnd, setFirstSchoolEnd] = useState('');
+    const [firstSchoolDiploma, setFirstSchoolDiploma] = useState('');
 
+    const [secondSchoolName, setSecondSchoolName] = useState('');
+    const [secondSchoolStart, setSecondSchoolStart] = useState('');
+    const [secondSchoolEnd, setSecondSchoolEnd] = useState('');
+    const [secondSchoolDiploma, setSecondSchoolDiploma] = useState('');
+    
+    const [thirdSchoolName, setThirdSchoolName] = useState('');
+    const [thirdSchoolStart, setThirdSchoolStart] = useState('');
+    const [thirdSchoolEnd, setThirdSchoolEnd] = useState('');
+    const [thirdSchoolDiploma, setThirdSchoolDiploma] = useState('');    
 
     const [highestLevelOfEducation, setHighestLevelOfEducation] = useState('');
 
@@ -46,39 +60,39 @@ const ApplicantForm = ({ setRedirect, setRedirectUrl, layout, hasLabel }) => {
 
     const submitRequest = async updates => {
         console.log(">>> UPDATES >>> ", updates);
-        return await new Promise((success, fail) => {
-            const url = `${LIVE_API_URI}/patient/task/update`;
-            const recStatus = updates.status;
-            const data = {
-                "ActualStDt": "12-19-2019 10:00:00 AM",
-                "ExpectedStDt": "12-19-2019 10:00:00 AM",
-                "PatientId": "d32ba1ae-7c98-4574-8c8d-c67806e03677",
-                "RecStatus": recStatus,
-                "ScheduleId": "024c4d00-227e-11ea-8c10-e944c5f24202",
-                "TaskId": 0,
-                "Type": "Medication",
-                "TypeQty": 1,
-                "TypeRefId": "535f8308-4a78-4e6d-8725-ceb14496b5d0",
-                "TypeUOM": "Each",
-                "CronDef": "0 9,20 * * *",
-                "Desc": "Actrapid HM 100",
-                "Recurring": true,
-                "SubType": "Insulin"
-            };
-            const options = {
-                method: "post",
-                headers: { 'X-API-KEY': API_KEY },
-                data: data,
-            };
-            axios(url, options).then(function (response) {
-                if (response.data) {
-                    toast.success(`Submit Successful`);
-                    // setRedirect(true);
-                }
-            });
-        })
-            .then(response => response)
-            .catch(error => error);
+        // return await new Promise((success, fail) => {
+        //     const url = `${LIVE_API_URI}/patient/task/update`;
+        //     const recStatus = updates.status;
+        //     const data = {
+        //         "ActualStDt": "12-19-2019 10:00:00 AM",
+        //         "ExpectedStDt": "12-19-2019 10:00:00 AM",
+        //         "PatientId": "d32ba1ae-7c98-4574-8c8d-c67806e03677",
+        //         "RecStatus": recStatus,
+        //         "ScheduleId": "024c4d00-227e-11ea-8c10-e944c5f24202",
+        //         "TaskId": 0,
+        //         "Type": "Medication",
+        //         "TypeQty": 1,
+        //         "TypeRefId": "535f8308-4a78-4e6d-8725-ceb14496b5d0",
+        //         "TypeUOM": "Each",
+        //         "CronDef": "0 9,20 * * *",
+        //         "Desc": "Actrapid HM 100",
+        //         "Recurring": true,
+        //         "SubType": "Insulin"
+        //     };
+        //     const options = {
+        //         method: "post",
+        //         headers: { 'X-API-KEY': API_KEY },
+        //         data: data,
+        //     };
+        //     axios(url, options).then(function (response) {
+        //         if (response.data) {
+        //             toast.success(`Submit Successful`);
+        //             // setRedirect(true);
+        //         }
+        //     });
+        // })
+        //     .then(response => response)
+        //     .catch(error => error);
     };
 
     useEffect(() => {
@@ -204,6 +218,13 @@ const ApplicantForm = ({ setRedirect, setRedirectUrl, layout, hasLabel }) => {
         <TabPane tabId="1">
             <Row>
                 <Col sm="12" style={{padding: 20}}>
+
+                <Card className="mb-3">
+                    <CardBody className="fs--1">
+                      <CardTitle></CardTitle>
+                      <Row>
+                        <Col>   
+
                     <FormGroup>
                         <Label for="degreeProgramSelect">Which Degree Program are you applying for?</Label>
                         <Input type="select" name="degreeProgramSelect" id="degreeProgramSelect" value={degreeProgramSelect} onChange={({ target }) => setDegreeProgramSelect(target.value)}>
@@ -225,6 +246,13 @@ const ApplicantForm = ({ setRedirect, setRedirectUrl, layout, hasLabel }) => {
                         <FormText>Only check this box if you have previously enrolled in courses or attended this college</FormText>
                     </FormGroup>                    
 
+
+
+                    </Col>
+                      </Row>
+                    </CardBody>
+                  </Card> 
+
                 </Col>
             </Row>
         </TabPane>
@@ -232,6 +260,12 @@ const ApplicantForm = ({ setRedirect, setRedirectUrl, layout, hasLabel }) => {
         <TabPane tabId="2" disabled={true}>
             <Row>
                 <Col sm="12" style={{padding: 20}}>
+
+                <Card className="mb-3">
+                    <CardBody className="fs--1">
+                      <CardTitle></CardTitle>
+                      <Row>
+                        <Col>                  
                 <FormGroup>
                     <Label for="firstName">First Name</Label>
                     <Input type="text" name="firstName" id="firstName" placeholder="" value={firstName} onChange={({ target }) => setFirstName(target.value)} />
@@ -320,6 +354,12 @@ const ApplicantForm = ({ setRedirect, setRedirectUrl, layout, hasLabel }) => {
                     <Input type="text" name="citizenShipCountry" id="citizenShipCountry" placeholder="" />
                 </FormGroup>
 
+
+                </Col>
+                      </Row>
+                    </CardBody>
+                  </Card>  
+
                 </Col>
             </Row>
         </TabPane>
@@ -327,54 +367,173 @@ const ApplicantForm = ({ setRedirect, setRedirectUrl, layout, hasLabel }) => {
         <TabPane tabId="3">
             <Row>
                 <Col sm="12" style={{padding: 20}}>
-                    <FormGroup>
-                        <Label for="highSchoolAttended">High School Attended</Label>
-                        <Input type="text" name="highSchoolAttended" id="highSchoolAttended" placeholder="" value={highSchoolAttended} onChange={({ target }) => setHighSchoolAttended(target.value)} />
-                    </FormGroup>
-
-                    
-                    <FormGroup>
-                        <Label for="highestLevelOfEducation">Highest Level of Education Completed</Label>
-                        <Input type="select" name="highestLevelOfEducation" id="highestLevelOfEducation" value={highestLevelOfEducation} onChange={({ target }) => setHighestLevelOfEducation(target.value)}>
-                            <option></option>
-                            <option>High School or GED</option>
-                            <option>Associates Degree</option>
-                            <option>Bachelors Degree</option>
-                            <option>Masters Degree</option>
-                            <option>Doctorate or PhD</option>
-                        </Input>
-                    </FormGroup>                    
-
-                    Date of Completion
-
-                    {/* Starting after high school, list the educational institutions you've attended:
-
-                    <CardTitle title="First School" light={false} /> */}
-
-                          <Card className="mb-3">
-                              <CardBody className="fs--1">
-                                <CardTitle>First School</CardTitle>
-                                  <Row>
-                                    <Col>
-                                        <FormGroup>
-                                            <Label for="firstSchoolName">School Name</Label>
-                                            <Input type="text" name="firstSchoolName" id="firstSchoolName" placeholder="" value={firstSchoolName} onChange={({ target }) => setFirstSchoolName(target.value)} />
-                                        </FormGroup>
-                                    </Col>
-                                  </Row>
-                              </CardBody>
-                          </Card>                    
-
-                    School Name
-
-                    School Start Date
-
-                    School End Date
-
-                    School Diploma Acquired
+                  <Card className="mb-3">
+                    <CardBody className="fs--1">
+                      <CardTitle>High School/GED</CardTitle>
+                      <Row>
+                        <Col>
+                          <FormGroup>
+                            <Label for="highSchoolAttended">High School Attended</Label>
+                            <Input type="text" name="highSchoolAttended" id="highSchoolAttended" placeholder="" value={highSchoolAttended} onChange={({ target }) => setHighSchoolAttended(target.value)} />
+                          </FormGroup>
 
 
+                          <FormGroup>
+                            <Label for="highestLevelOfEducation">Highest Level of Education Completed</Label>
+                            <Input type="select" name="highestLevelOfEducation" id="highestLevelOfEducation" value={highestLevelOfEducation} onChange={({ target }) => setHighestLevelOfEducation(target.value)}>
+                              <option></option>
+                              <option>High School or GED</option>
+                              <option>Associates Degree</option>
+                              <option>Bachelors Degree</option>
+                              <option>Masters Degree</option>
+                              <option>Doctorate or PhD</option>
+                            </Input>
+                          </FormGroup>
 
+
+                          <FormGroup>
+                            <Label for="dateOfCompletion">Date of Completion</Label>
+                            <Datetime
+                              id="dateOfCompletion"
+                              value={dateOfCompletion}
+                              onChange={setDateOfCompletion}
+                              type="datetime"
+                              timeFormat={false}
+                              closeOnSelect
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                    </CardBody>
+                  </Card>  
+
+                  <hr />
+
+                    {/* 
+                    <hr/>
+                    Starting after high school, list the educational institutions you've attended:
+
+                    */}
+
+                    <Card className="mb-3">
+                        <CardBody className="fs--1">
+                          <CardTitle>First School</CardTitle>
+                            <Row>
+                              <Col>
+                                  <FormGroup>
+                                      <Label for="firstSchoolName">School Name</Label>
+                                      <Input type="text" name="firstSchoolName" id="firstSchoolName" placeholder="" value={firstSchoolName} onChange={({ target }) => setFirstSchoolName(target.value)} />
+                                  </FormGroup>
+                                  <FormGroup>
+                                      <Label for="firstSchoolStart">School Start Date</Label>
+                                      <Datetime 
+                                        id="firstSchoolStart"
+                                        value={firstSchoolStart}
+                                        onChange={setFirstSchoolStart}
+                                        type="datetime"
+                                        timeFormat={false}
+                                        closeOnSelect                        
+                                      />                                      
+                                  </FormGroup>  
+                                  <FormGroup>
+                                      <Label for="firstSchoolEnd">School End Date</Label>
+                                      <Datetime 
+                                        id="firstSchoolEnd"
+                                        value={firstSchoolEnd}
+                                        onChange={setFirstSchoolEnd}
+                                        type="datetime"
+                                        timeFormat={false}
+                                        closeOnSelect                        
+                                      />                                        
+                                  </FormGroup>   
+                                  <FormGroup>
+                                      <Label for="firstSchoolDiploma">Degree/Diploma Acquired</Label>
+                                      <Input type="text" name="firstSchoolDiploma" id="firstSchoolDiploma" placeholder="" value={firstSchoolDiploma} onChange={({ target }) => setFirstSchoolDiploma(target.value)} />
+                                  </FormGroup>                                                                                                       
+                              </Col>
+                            </Row>
+                        </CardBody>
+                    </Card>                    
+ 
+                    <Card className="mb-3">
+                        <CardBody className="fs--1">
+                          <CardTitle>Second School</CardTitle>
+                            <Row>
+                              <Col>
+                                  <FormGroup>
+                                      <Label for="secondSchoolName">School Name</Label>
+                                      <Input type="text" name="secondSchoolName" id="secondSchoolName" placeholder="" value={secondSchoolName} onChange={({ target }) => setSecondSchoolName(target.value)} />
+                                  </FormGroup>
+                                  <FormGroup>
+                                      <Label for="secondSchoolStart">School Start Date</Label>
+                                      <Datetime 
+                                        id="secondSchoolStart"
+                                        value={secondSchoolStart}
+                                        onChange={setSecondSchoolStart}
+                                        type="datetime"
+                                        timeFormat={false}
+                                        closeOnSelect                        
+                                      />                                         
+                                  </FormGroup>  
+                                  <FormGroup>
+                                      <Label for="secondSchoolEnd">School End Date</Label>
+                                      <Datetime 
+                                        id="secondSchoolEnd"
+                                        value={secondSchoolEnd}
+                                        onChange={setSecondSchoolEnd}
+                                        type="datetime"
+                                        timeFormat={false}
+                                        closeOnSelect                        
+                                      />                                       
+                                  </FormGroup>   
+                                  <FormGroup>
+                                      <Label for="secondSchoolDiploma">Degree/Diploma Acquired</Label>
+                                      <Input type="text" name="secondSchoolDiploma" id="secondSchoolDiploma" placeholder="" value={secondSchoolDiploma} onChange={({ target }) => setSecondSchoolDiploma(target.value)} />
+                                  </FormGroup>                                                                                                       
+                              </Col>
+                            </Row>
+                        </CardBody>
+                    </Card>  
+                   
+                    <Card className="mb-3">
+                        <CardBody className="fs--1">
+                          <CardTitle>Third School</CardTitle>
+                            <Row>
+                              <Col>
+                                  <FormGroup>
+                                      <Label for="thirdSchoolName">School Name</Label>
+                                      <Input type="text" name="thirdSchoolName" id="thirdSchoolName" placeholder="" value={thirdSchoolName} onChange={({ target }) => setThirdSchoolName(target.value)} />
+                                  </FormGroup>
+                                  <FormGroup>
+                                      <Label for="thirdSchoolStart">School Start Date</Label>
+                                      <Datetime 
+                                        id="thirdSchoolStart"
+                                        value={thirdSchoolStart}
+                                        onChange={setThirdSchoolStart}
+                                        type="datetime"
+                                        timeFormat={false}
+                                        closeOnSelect                        
+                                      />                                          
+                                  </FormGroup>  
+                                  <FormGroup>
+                                      <Label for="thirdSchoolEnd">School End Date</Label>
+                                      <Datetime 
+                                        id="thirdSchoolEnd"
+                                        value={thirdSchoolEnd}
+                                        onChange={setThirdSchoolEnd}
+                                        type="datetime"
+                                        timeFormat={false}
+                                        closeOnSelect                        
+                                      />                                           
+                                  </FormGroup>   
+                                  <FormGroup>
+                                      <Label for="thirdSchoolDiploma">Degree/Diploma Acquired</Label>
+                                      <Input type="text" name="thirdSchoolDiploma" id="thirdSchoolDiploma" placeholder="" value={thirdSchoolDiploma} onChange={({ target }) => setThirdSchoolDiploma(target.value)} />
+                                  </FormGroup>                                                                                                       
+                              </Col>
+                            </Row>
+                        </CardBody>
+                    </Card>  
 
                 </Col>
             </Row>
